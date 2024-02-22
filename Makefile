@@ -13,14 +13,14 @@
 # Database bindings
 BIND_WIREDTIGER ?= 0
 BIND_LEVELDB ?= 0
-BIND_ROCKSDB ?= 0
+BIND_ROCKSDB ?= 1
 BIND_LMDB ?= 0
 BIND_SQLITE ?= 0
 
 # Extra options
 DEBUG_BUILD ?=
-EXTRA_CXXFLAGS ?=
-EXTRA_LDFLAGS ?=
+EXTRA_CXXFLAGS = -I/home/ubuntu/Mnemosyne/skew-aware-rocksdb-8.9.1/include
+EXTRA_LDFLAGS = -L/home/ubuntu/Mnemosyne/skew-aware-rocksdb-8.9.1 -ldl -lz -lsnappy -lzstd -lbz2 -llz4
 
 # HdrHistogram for tail latency report
 BIND_HDRHISTOGRAM ?= 1

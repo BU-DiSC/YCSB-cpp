@@ -8,3 +8,9 @@ tags
 compile_commands.json
 .clangd/
 .cache/
+
+*.cmake
+*.txt
+
+CMakeFiles/
+CMakeCache.txt
