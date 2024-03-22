@@ -14,7 +14,9 @@ block_cache_size=182400000
 bpk=2
 threads=4
 methods=("workloadaware" "monkey" "default")
-DB_HOME="/data/ycsb_working_home/"
+# Remember to specify your database path here to use a dedicated storage device
+#DB_HOME="/data/ycsb_working_home/"
+DB_HOME="./"
 #methods=("workloadaware" "monkey")
 cp rocksdb/rocksdb.properties rocksdb/rocksdb.origin_properties
 sed -i 's/rocksdb\.dbname=\.\//rocksdb.dbname=${DB_HOME}/g' rocksdb/rocksdb.properties
