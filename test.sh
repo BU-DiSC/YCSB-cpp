@@ -10,9 +10,9 @@ recordcount=80000000
 #operationcount=100000
 #recordcount=100000
 dynamic_cmpct="false"
-block_cache_size=182400000
-bpk=2
-threads=4
+block_cache_size=419430400
+bpk=3
+threads=1
 methods=("workloadaware" "monkey" "default")
 # Remember to specify your database path here to use a dedicated storage device
 #DB_HOME="/data/ycsb_working_home/"
