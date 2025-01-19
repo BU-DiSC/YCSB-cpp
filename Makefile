@@ -19,8 +19,8 @@ BIND_SQLITE ?= 0
 
 # Extra options
 DEBUG_BUILD ?= 
-EXTRA_CXXFLAGS = -I/home/ubuntu/Mnemosyne/skew-aware-rocksdb-8.9.1/include
-EXTRA_LDFLAGS = -L/home/ubuntu/Mnemosyne/skew-aware-rocksdb-8.9.1 -ldl -lz -lsnappy -lzstd -lbz2 -llz4
+EXTRA_CXXFLAGS ?= -I../skew-aware-rocksdb-8.9.1/include
+EXTRA_LDFLAGS ?= -L../skew-aware-rocksdb-8.9.1 -ldl -lz -lsnappy -lzstd -lbz2 -llz4
 
 # HdrHistogram for tail latency report
 BIND_HDRHISTOGRAM ?= 1

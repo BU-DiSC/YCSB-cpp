@@ -3,7 +3,8 @@ import sys
 runs = int(sys.argv[1])
 exp_dir = sys.argv[2]
 workloads = ["load", "a", "b", "c", "d", "f"]
-methods = ["workloadaware", "monkey", "default"]
+workloads = ["load", "b"]
+methods = ["mnemosyne-plus", "mnemosyne", "default"]
 
 
 def aggregate(filename, result, workload_index):

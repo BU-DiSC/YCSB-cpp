@@ -15,20 +15,28 @@ fi
 
 
 workload_types=("a" "b" "c" "d" "f")
+workload_types=("b")
 runs=3
 fieldlength=9
 field_len_dist="uniform"
-operationcount=3000000
-recordcount=30000000
+operationcount=100000000
+recordcount=100000000
+target_file_size_base=134217728 #128MB
+size_ratio=10
+level_size_base=$(echo "${target_file_size_base} * 4" | bc)
 #operationcount=100000
 #recordcount=100000
-dynamic_cmpct="true"
+dynamic_cmpct="false"
 #block_cache_size=419430400
-block_cache_size=209715200
+#block_cache_size=209715200
 #block_cache_size=104857600
 #block_cache_size=536870912
-#block_cache_size=2684354560
-bpk=4
+#block_cache_size=2684354560  #50GB data
+#block_cache_size=2147483648 #40GB data
+#block_cache_size=1610612736 #30GB data
+#block_cache_size=1073741824 #20GB data
+block_cache_size=536870912 #10GB data
+bpk=2
 threads=16
 methods=("mnemosyne-plus" "mnemosyne" "default")
 #methods=("default")
@@ -48,6 +56,10 @@ do
 	cp rocksdb/options-exp-${method}.ini rocksdb/options.ini
 	sed -i "s|block_cache={capacity=33554432}|block_cache={capacity=${block_cache_size}}|g" rocksdb/options.ini
 	sed -i "s|level_compaction_dynamic_level_bytes=true|level_compaction_dynamic_level_bytes=${dynamic_cmpct}|g" rocksdb/options.ini
+	sed -i "s|target_file_size_base=33554432|target_file_size_base=${target_file_size_base}|g" rocksdb/options.ini
+	sed -i "s|write_buffer_size=33554432|write_buffer_size=${target_file_size_base}|g" rocksdb/options.ini
+	sed -i "s|max_bytes_for_level_base=134217728|max_bytes_for_level_base=${level_size_base}|g" rocksdb/options.ini
+	sed -i "s|max_bytes_for_level_multiplier=4|max_bytes_for_level_multiplier=${size_ratio}|g" rocksdb/options.ini
   	for workload_type in ${workload_types[@]}
   	do
 	  cp workloads/workload${workload_type} workloads/workload-temp
