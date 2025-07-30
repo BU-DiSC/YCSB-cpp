@@ -3,7 +3,6 @@ import sys
 runs = int(sys.argv[1])
 exp_dir = sys.argv[2]
 workloads = ["load", "a", "b", "c", "d", "f"]
-workloads = ["load", "b"]
 methods = ["mnemosyne-plus", "mnemosyne", "default"]
 
 
@@ -21,7 +20,7 @@ def aggregate(filename, result, workload_index):
 
 def output(filename, result):
     outfile = open(filename, "w")
-    header = "workloads"
+    header = "workload"
     for m in methods:
         header += "," + m
     header += "\n"
