@@ -30,11 +30,9 @@ DYNAMIC_COMPACT=${2:-$DEFAULT_DYNAMIC_COMPACT}
 # --- Pre-run Checks ---
 
 # Base path for the database output
-DB_HOME="./ycsb_working_home"
-
-
 # Remember to specify your database path here to use a dedicated storage device
-DB_HOME="/scratchNVM1/zczhu/test_db_dir2/ycsb_working_home"
+DB_HOME="${FAST_DB_HOME:-./ycsb_working_home}"
+
 if [ ! -d "${DB_HOME}" ]; then
     echo "Cannot find database path ${DB_HOME}"
     mkdir -p "${DB_HOME}"
@@ -91,14 +89,13 @@ mkdir -p ${OUTPUT_DIR}
 # --- Execute Experiment ---
 
 workload_types=("a" "b" "c" "d" "f")
-#workload_types=("a")
 runs=3
 fieldlength=9
 field_len_dist="uniform"
-operationcount=60000000
-recordcount=30000000
-#operationcount=1000000
-#recordcount=1000000
+operationcount=6000000
+recordcount=3000000
+#operationcount=60000000
+#recordcount=30000000
 dynamic_cmpct=${DYNAMIC_COMPACT}
 block_cache_size=209715200 # 200MB
 bpk=2
@@ -117,7 +114,6 @@ echo "  - Runs: ${runs}"
 echo "----------------------------------------------------"
 
 methods=("mnemosyne-plus" "mnemosyne" "default")
-methods=("mnemosyne-plus" "mnemosyne")
 compiled_by_default="false"
 cp rocksdb/rocksdb.properties rocksdb/rocksdb.origin_properties
 sed -i "s|rocksdb\.dbname=.*|rocksdb.dbname=${DB_HOME}|g" rocksdb/rocksdb.properties
